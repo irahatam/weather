@@ -5,8 +5,9 @@ import { useHistory } from "react-router-dom";
 import Header from "../components/Header";
 import WeatherImage from "../components/WeatherImage";
 
+// Calling env file doesn't work
 // const weatherKey = process.env.OPENWEATHERMAP_KEY;
-const weatherKey = `c192e7c68ea0a788e86845763d2aa2ed`;
+const weatherKey = `7e36d76354fcaf2557bf7ddf78b3d5e6`;
 
 function Home() {
   const history = useHistory();
@@ -25,8 +26,8 @@ function Home() {
         setWeatherData(weather);
       })
       .catch(function (error) {
-        // error
-        console.log(error);
+        // best practice: no console logs!!!
+        console.warn(error);
       });
   }, [city]);
 
@@ -80,22 +81,7 @@ function Home() {
   console.log("weatherData", weatherData);
 
   return (
-    <div
-      className="body"
-      style={{
-        background: `linear-gradient(
-            rgba(${
-              parseInt(currentTemp.slice(0, -1)) > 80
-                ? "255, 204, 255"
-                : "255, 153, 153"
-            },
-            ${parseInt(cloudiness.slice(0, -1)) / 250 + 1}), 
-            rgba(${
-              parseInt(currentTemp.slice(0, -1)) > 80 ? "0,0,0" : "255,255,0"
-            },
-            ${parseInt(cloudiness.slice(0, -1)) / 250 + 0.5}))`,
-      }}
-    >
+    <div className="body">
       <Header />
       <main className="Home">
         <h2>
